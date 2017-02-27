@@ -12,9 +12,7 @@ import javax.servlet.ServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.weilai.commons.constant.ConstantInfo;
 import com.weilai.commons.log.LogOutput;
-import com.weilai.commons.log.dto.LogDto;
 
 
 public class WeilaiFilter implements Filter{
