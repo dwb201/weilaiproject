@@ -103,4 +103,9 @@ public class Account
         response.getWriter().write("{\"result\":\""+ 0 +"\"}");
     }
   }
+  
+  @RequestMapping({"/login"})
+  public String viewLoginForm(){
+	  return "loginForm";
+  }
 }
