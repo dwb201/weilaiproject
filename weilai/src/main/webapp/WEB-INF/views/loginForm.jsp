@@ -4,7 +4,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div id="wrapper">
  <h3>ログインフォーム</h3>
- 
  <c:if test="${param.containsKey('error')}">
      <span style="color:red;">
          <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
