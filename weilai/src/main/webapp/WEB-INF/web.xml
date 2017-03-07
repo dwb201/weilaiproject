@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="3.1"
  xmlns="http://xmlns.jcp.org/xml/ns/javaee"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+ <listener>
+  <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+ </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:security-context.xml;classpath:spring-weilai-commons.xml</param-value>
+  </context-param>
  <context-param>
   <param-name>contextClass</param-name>
   <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
  </context-param>
  <context-param>
-  <param-name>contextConfigLocation</param-name>
-  <param-value>springbook.config.WebSecurityConfig</param-value>
- </context-param>
- <!-- 编码过滤器-->
+    <param-name>contextConfigLocation</param-name>
+    <param-value>com.weilai.commons.springsecurity.WebSecurityConfig</param-value>
+  </context-param>
+ 
+ <!-- 编码过滤器
  <filter>
   <filter-name>encodingFilter</filter-name>
   <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -20,39 +29,33 @@
    <param-value>UTF-8</param-value>
   </init-param>
  </filter>
- <filter>
-  <filter-name>DelegatingFilterProxy</filter-name>
+ <filter-mapping>
+  <filter-name>encodingFilter</filter-name>
+  <url-pattern>/</url-pattern>
+ </filter-mapping>-->
+ <!-- <filter>
+  <filter-name>weilaiFilter</filter-name>
   <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
   <init-param>
    <param-name>targetFilterLifecycle</param-name>
    <param-value>true</param-value>
   </init-param>
-  <init-param>
-   <param-name>targetBeanName</param-name>
-   <param-value>weilaiFilter</param-value>
-  </init-param>
  </filter>
- <filter>
-  <filter-name>springSecurityFilterChain</filter-name>
-  <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
- </filter>
+  <filter-mapping>
+  <filter-name>weilaiFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+ </filter-mapping> -->
+<filter>
+   <filter-name>springSecurityFilterChain</filter-name>
+   <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+</filter>
  <filter-mapping>
   <filter-name>springSecurityFilterChain</filter-name>
   <url-pattern>/*</url-pattern>
  </filter-mapping>
  
- <filter-mapping>
-  <filter-name>encodingFilter</filter-name>
-  <url-pattern>/</url-pattern>
- </filter-mapping>
- <filter-mapping>
-  <filter-name>DelegatingFilterProxy</filter-name>
-  <url-pattern>/*</url-pattern>
- </filter-mapping>
  <!-- <filter-class>com.weilai.commons.filter.WeilaiFilter</filter-class> -->
- <listener>
-  <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
- </listener>
+ 
  <!-- spring security listener 
  Spring监听器 
  防止Spring内存溢出监听器 -->
@@ -115,4 +118,5 @@
  <welcome-file-list>
   <welcome-file>/index.html</welcome-file>
  </welcome-file-list>
+
 </web-app>
